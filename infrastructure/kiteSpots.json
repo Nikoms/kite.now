@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Surfers Paradise",
+    "coordinates": {
+      "latitude": 51.36072775508209,
+      "longitude": 3.3284524836003984
+    }
+  },
+  {
+    "name": "Icarus Surfclub",
+    "coordinates": {
+      "latitude": 51.32787360588778,
+      "longitude": 3.1717293052329576
+    }
+  },
+  {
+    "name": "Tarifa - Campo de Futbol",
+    "coordinates": {
+      "latitude": 36.21349205648004,
+      "longitude": -5.437011632193565
+    }
+  },
+  {
+    "name": "Jericoacoara",
+    "coordinates": {
+      "latitude": -2.7946507034392787,
+      "longitude": -40.52052314722127
+    }
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "name": "kite.now",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "git@github.com:Nikoms/kite.now.git",
+  "author": "Nicolas De Boose <nikoms@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "dayjs": "^1.10.6",
+    "geo-tz": "^6.0.1",
+    "node-fetch": "^2.6.1"
+  }
+}
