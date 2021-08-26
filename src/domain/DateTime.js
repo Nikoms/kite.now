@@ -19,6 +19,10 @@ export class DateTime {
     return dayjs(this.date).tz(this.timezone).format('dd DD/MM/YYYY HH:mm ZZ');
   }
 
+  shortFormat() {
+    return dayjs(this.date).tz(this.timezone).format('dd DD/MM HH:mm');
+  }
+
   between(from, to) {
     return this.date.getHours() >= from && this.date.getHours() < to;
   }

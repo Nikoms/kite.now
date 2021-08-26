@@ -7,9 +7,13 @@
   "license": "MIT",
   "private": true,
   "type": "module",
+  "scripts": {
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+  },
   "dependencies": {
     "dayjs": "^1.10.6",
     "geo-tz": "^6.0.1",
+    "jest": "^27.0.6",
     "node-fetch": "^2.6.1"
   }
 }

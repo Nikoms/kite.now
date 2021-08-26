@@ -2,13 +2,13 @@ export class Wind {
   #speed;
   #unit;
   #gust;
-  #degree;
+  #angle;
 
-  constructor(speed, unit, gust, degree) {
+  constructor(speed, unit, gust, angle) {
     this.#speed = speed;
     this.#unit = unit;
     this.#gust = gust;
-    this.#degree = degree;
+    this.#angle = angle;
   }
 
   toKnots() {
@@ -20,7 +20,7 @@ export class Wind {
         this.#speed * 1.943844492,
         'knots',
         this.#gust * 1.943844492,
-        this.#degree,
+        this.#angle,
       );
     }
     throw new Error(`"${this.#unit}" can not be converted to knots`);
@@ -38,11 +38,15 @@ export class Wind {
     return this.#unit;
   }
 
+  angle() {
+    return this.#angle;
+  }
+
   toSnapshot() {
     return {
       speed: this.#speed,
       unit: this.#unit,
-      degree: this.#degree,
+      angle: this.#angle,
       gust: this.#gust,
     };
   }

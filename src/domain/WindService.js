@@ -1,5 +1,6 @@
 import fs from 'fs';
 import {LocationForecast} from './LocationForecast.js';
+import {BeachWindAngle} from './BeachWindAngle.js';
 
 export class WindService {
   /**
@@ -32,7 +33,7 @@ export class WindService {
         type: 'hour',
         wind: {
           speed: forecast['wind_speed'],
-          degree: forecast['wind_deg'],
+          angle: forecast['wind_deg'],
           gust: forecast['wind_gust'],
           unit: 'm/s',
         },
@@ -51,7 +52,7 @@ export class WindService {
           type: 'hour',
           wind: {
             speed: forecast['wind']['speed'],
-            degree: forecast['wind']['deg'],
+            angle: forecast['wind']['deg'],
             gust: forecast['wind']['gust'],
             unit: 'm/s',
           },
@@ -97,4 +98,18 @@ export class WindService {
     fs.writeFileSync(`${this.rootDir}/cache/${cacheName}.json`, JSON.stringify(forecast.toSnapshot(), null, '    '));
   }
 
+  /**
+   * @param {import("./Wind").Wind} wind
+   * @param {number} beachAngle
+   * @return {BeachWindAngle}
+   */
+  getWindDirectionFromBeach(wind, beachAngle) {
+    // Align wind with beach "measure": 90° is a wind coming from the north (easier to understand)
+    const turnedWind = (wind.angle() + 90) % 360;
+
+    //Turn the wind to fake a 0° beach
+    const angleFromBeach = (turnedWind + beachAngle) % 360;
+
+    return new BeachWindAngle(angleFromBeach)
+  }
 }

@@ -4,27 +4,31 @@
     "coordinates": {
       "latitude": 51.36072775508209,
       "longitude": 3.3284524836003984
-    }
+    },
+    "beachAngle": 18.5
   },
   {
     "name": "Icarus Surfclub",
     "coordinates": {
       "latitude": 51.32787360588778,
       "longitude": 3.1717293052329576
-    }
+    },
+    "beachAngle": 45
   },
   {
-    "name": "Tarifa - Campo de Futbol",
+    "name": "Gaia Beach Club Tarifa",
     "coordinates": {
-      "latitude": 36.21349205648004,
-      "longitude": -5.437011632193565
-    }
+      "latitude": 36.02352302693371,
+      "longitude": -5.618743989263071
+    },
+    "beachAngle": 129
   },
   {
     "name": "Jericoacoara",
     "coordinates": {
       "latitude": -2.7946507034392787,
       "longitude": -40.52052314722127
-    }
+    },
+    "beachAngle": 90
   }
 ]

@@ -5,10 +5,14 @@
 ``` 
 node index
 ```
+## Test it
+
+``` 
+yarn test
+```
 
 ## Improve:
 
-- Calculate if the position of the wind is ok comparing to the beach
 - Check for the cloud
 - Check for the rain
 - Check for the thunder 😅

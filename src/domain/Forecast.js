@@ -15,7 +15,7 @@ export class Forecast {
       return {
         time: new Date(s.time),
         type: s.type,
-        wind: new Wind(s.wind.speed, s.wind.unit, s.wind.gust, s.wind.degree),
+        wind: new Wind(s.wind.speed, s.wind.unit, s.wind.gust, s.wind.angle),
       };
     }));
   }

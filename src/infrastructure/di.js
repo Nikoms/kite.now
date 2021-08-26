@@ -34,7 +34,7 @@ const service = (nameOrInterface, getProdInstance, getInstanceTest = null) => {
 
 export const api = service(Api, () => new Api());
 export const windService = service(WindService, () => new WindService(api(), 'dc7b9c8f27244ec109d4673ecbe54f2c', root));
-export const kiteSpots = service(KiteSpots, () => new InMemoryKiteSpots(JSON.parse(fs.readFileSync(`${root}/infrastructure/kiteSpots.json`))));
+export const kiteSpots = service(KiteSpots, () => new InMemoryKiteSpots(JSON.parse(fs.readFileSync(`${root}/src/infrastructure/kiteSpots.json`,'utf-8'))));
 
 /**
  *

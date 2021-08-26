@@ -10,6 +10,11 @@ export class InMemoryKiteSpots extends KiteSpots {
     this.kiteSpots = kiteSpots;
   }
 
+  /**
+   * @param {import("../domain/types").Coordinates} coordinates
+   * @param {{top: number, maxDistance: number}} options
+   * @return {Promise<import("../domain/KiteSpot").KiteSpot[]>}
+   */
   async getClosest(coordinates, options) {
     let kiteSpotsWithDistance = this.kiteSpots.map(ks => ({
       ...ks,

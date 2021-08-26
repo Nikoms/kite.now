@@ -2,15 +2,16 @@ type Coordinates = {
   latitude: number,
   longitude: number
 }
+type CoordinatesSnapshot = Coordinates;
 type KiteSpotSnapShot = {
-  coordinates: Coordinates,
+  coordinates: CoordinatesSnapshot,
   name: string
 }
 
 type ForecastSnapshot = {
   time: number,
   type: 'hour' | 'day',
-  wind: { speed: number, unit: string, degree: number, gust: number }
+  wind: { speed: number, unit: string, angle: number, gust: number }
 }[];
 
 type ForecastPart = {
@@ -20,7 +21,13 @@ type ForecastPart = {
 }
 
 type LocationForecastSnapshot = {
-  coordinates: Coordinates,
+  coordinates: CoordinatesSnapshot,
   forecast: ForecastSnapshot,
   date: number
+}
+
+type KiteSpotSnapshot = {
+  name: string
+  coordinates: CoordinatesSnapshot
+  beachAngle: number
 }
