@@ -13,10 +13,17 @@ for (const kiteSpot of closestKiteSpots) {
     const datetime = new DateTime(f.time, kiteSpotTimeZone);
     const icons = [];
     const isDuringDay = datetime.between(9, 19);
-    if (isDuringDay) {
-      icons.push('🌞️');
+    icons.push(`${` ${f.cloud}`.substr(-3)} %`)
+    if (f.cloud <=5) {
+      icons.push('☀️ ');
+    } else if (f.cloud <= 25) {
+      icons.push('🌤 ');
+    } else if (f.cloud <= 50) {
+      icons.push('⛅️');
+    } else if (f.cloud <= 75) {
+      icons.push('🌥️ ');
     } else {
-      icons.push('💤');
+      icons.push('☁️️ ');
     }
     if (wind.isGusty()) {
       icons.push('🌪');

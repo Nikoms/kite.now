@@ -16,6 +16,7 @@ export class Forecast {
         time: new Date(s.time),
         type: s.type,
         wind: new Wind(s.wind.speed, s.wind.unit, s.wind.gust, s.wind.angle),
+        cloud: s.cloud
       };
     }));
   }
@@ -47,6 +48,7 @@ export class Forecast {
       time: s.time.getTime(),
       type: s.type,
       wind: s.wind.toSnapshot(),
+      cloud: s.cloud
     }));
   }
 }

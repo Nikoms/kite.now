@@ -27,6 +27,7 @@ export class WindService {
 
     const forecastSnapshot = {};
     for (const forecast of twoDaysForecastResponse['hourly']) {
+      console.log(forecast)
       forecastSnapshot[forecast['dt'] * 1000] = {
         time: forecast['dt'] * 1000,
         type: 'hour',
@@ -36,6 +37,7 @@ export class WindService {
           gust: forecast['wind_gust'],
           unit: 'm/s',
         },
+        cloud: forecast['clouds'],
       };
     }
 
@@ -55,6 +57,7 @@ export class WindService {
             gust: forecast['wind']['gust'],
             unit: 'm/s',
           },
+          cloud: forecast['clouds']['all'],
         };
       }
     }
