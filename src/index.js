@@ -28,7 +28,7 @@ for (const kiteSpot of closestKiteSpots) {
         icons.push('🍃');
       }
     }
-    const windDirection = windService().getWindDirectionFromBeach(wind, kiteSpot.beachAngle);
+    const windDirection = kiteSpot.windOrientation(wind);
     if (windDirection.isOn()) {
       icons.push('🔛');
     } else {

@@ -1,13 +1,13 @@
-import {BeachWindAngle} from './BeachWindAngle.js';
+import {BeachWindOrientation} from './BeachWindOrientation.js';
 
 const expectDirection = function ({from, to}, expectedDirection) {
   for (let i = from; i <= to; i++) {
-    expect(`${i}:${new BeachWindAngle(i).direction()}`).toBe(`${i}:${expectedDirection}`);
+    expect(`${i}:${new BeachWindOrientation(i).direction()}`).toBe(`${i}:${expectedDirection}`);
   }
 };
-const expectShore = function ({from, to}, expectedShore) {
+const expectShore = function ({from, to, isOn: expectedIsOn}) {
   for (let i = from; i <= to; i++) {
-    expect(`${i}:${new BeachWindAngle(i).shore()}`).toBe(`${i}:${expectedShore}`);
+    expect(`${i}:${new BeachWindOrientation(i).isOn()}`).toBe(`${i}:${expectedIsOn}`);
   }
 };
 
@@ -28,9 +28,9 @@ it('convert angle to direction', () => {
 });
 
 it('0-180 = on shore', () => {
-  expectShore({from: 0, to: 180}, 'on');
+  expectShore({from: 0, to: 180, isOn: true});
 });
 
 it('181-360 = off shore', () => {
-  expectShore({from: 181, to: 360}, 'off');
+  expectShore({from: 181, to: 360, isOn: false});
 });

@@ -1,4 +1,4 @@
-export class BeachWindAngle {
+export class BeachWindOrientation {
   /**
    * @type number
    */
@@ -9,7 +9,7 @@ export class BeachWindAngle {
    */
   constructor(angle) {
     if (angle < 0 || angle > 360) {
-      throw new Error(`${angle} is not an angle`);
+      throw new Error(`${angle} is not a valid angle`);
     }
     this.#angle = angle;
   }
