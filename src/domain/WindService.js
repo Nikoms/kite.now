@@ -27,7 +27,7 @@ export class WindService {
 
     const forecastSnapshot = {};
     for (const forecast of twoDaysForecastResponse['hourly']) {
-      console.log(forecast)
+      console.log(forecast);
       forecastSnapshot[forecast['dt'] * 1000] = {
         time: forecast['dt'] * 1000,
         type: 'hour',
@@ -38,6 +38,7 @@ export class WindService {
           unit: 'm/s',
         },
         cloud: forecast['clouds'],
+        sky: WindService.#convertSkyIconToText(forecast['weather'][0]['icon']),
       };
     }
 
@@ -58,6 +59,7 @@ export class WindService {
             unit: 'm/s',
           },
           cloud: forecast['clouds']['all'],
+          sky: WindService.#convertSkyIconToText(forecast['weather'][0]['icon']),
         };
       }
     }
@@ -71,6 +73,33 @@ export class WindService {
     this.#setCache(coordinates, locationForecast);
 
     return locationForecast;
+  }
+
+  /**
+   * @param {string} icon
+   */
+  static #convertSkyIconToText(icon) {
+    switch (icon.substr(0, 2)) {
+      case '01':
+        return 'clearSky';
+      case '02':
+        return 'fewClouds';
+      case '03':
+        return 'scatteredClouds';
+      case '04':
+        return 'brokenClouds';
+      case '09':
+        return 'rain';
+      case '10':
+        return 'rain';
+      case '11':
+        return 'thunderstorm';
+      case '13':
+        return 'snow';
+      case '50':
+        return 'mist';
+    }
+    throw new Error(`Icon "${icon}" unknown`);
   }
 
   /**

@@ -5,7 +5,11 @@
       "latitude": 51.36072775508209,
       "longitude": 3.3284524836003984
     },
-    "beachAngle": 18.5
+    "beachAngle": 18.5,
+    "live": {
+      "video": "https://www.youtube.com/watch?v=Sx-oMVmNoPA",
+      "wind": "https://www.surfersparadise.be/weerdata%20surfers/broadcast.jpg"
+    }
   },
   {
     "name": "Icarus Surfclub",
