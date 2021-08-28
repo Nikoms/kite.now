@@ -23,10 +23,13 @@ for (const kiteSpot of closestKiteSpots) {
     } else {
       icons.push('☁️️ ');
     }
-    icons.push(f.sky);
+    if (f.rain.isRaining()) {
+      icons.push(`🌧 ${`${f.rain.toSnapshot()}`.padStart(5, ' ')}`);
+    } else {
+      icons.push(`   ☂️   `);
+    }
     if (wind.isGusty()) {
-      icons.push('🌪');
-      icons.push('💨');
+      icons.push('🌪 ');
     } else {
       if (wind.isEnough()) {
         icons.push('🪁');
@@ -51,6 +54,7 @@ for (const kiteSpot of closestKiteSpots) {
     }
 
     const color = isDuringDay ? '\x1b[37m%s\x1b[0m' : '\x1b[2m%s\x1b[0m';
-    console.log(color, `${datetime.shortFormat()} => ${wind.speed()}-${wind.gust()} kn: ${icons.join('|')} `);
+    console.log(color, `${datetime.shortFormat()} => ${`${wind.speed()}`.padStart(2, ' ')} - ${`${wind.gust()}`.padStart(2, ' ')} kts: ${icons.join('|')} `);
   }
+
 }

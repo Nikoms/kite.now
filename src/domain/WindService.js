@@ -22,6 +22,20 @@ export class WindService {
     if (this.#hasCache(coordinates)) {
       return this.#getCache(coordinates);
     }
+
+    const extractRain = (rain) => {
+      if (!rain) {
+        return 'no';
+      }
+      if (rain['1h']) {
+        return rain['1h'];
+      }
+
+      if (rain['3h']) {
+        return rain['3h'];
+      }
+      throw new Error(`There is rain, but we can handle it: ${JSON.stringify(rain)}`);
+    };
     const twoDaysForecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.latitude}&lon=${coordinates.longitude}&appid=${this.apiKey}&units=metric&exclude=minutely,current,daily,alerts`;
     const twoDaysForecastResponse = await this.api.getJson(twoDaysForecastUrl);
 
@@ -39,6 +53,7 @@ export class WindService {
         },
         cloud: forecast['clouds'],
         sky: WindService.#convertSkyIconToText(forecast['weather'][0]['icon']),
+        rain: extractRain(forecast['rain']),
       };
     }
 
@@ -60,6 +75,7 @@ export class WindService {
           },
           cloud: forecast['clouds']['all'],
           sky: WindService.#convertSkyIconToText(forecast['weather'][0]['icon']),
+          rain: extractRain(forecast['rain']),
         };
       }
     }

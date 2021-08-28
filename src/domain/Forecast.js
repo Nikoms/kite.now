@@ -1,4 +1,5 @@
 import {Wind} from './Wind.js';
+import {Rain} from './Rain.js';
 
 export class Forecast {
   /**
@@ -17,7 +18,8 @@ export class Forecast {
         type: s.type,
         wind: new Wind(s.wind.speed, s.wind.unit, s.wind.gust, s.wind.angle),
         cloud: s.cloud,
-        sky: s.sky
+        sky: s.sky,
+        rain: Rain.fromSnapshot(s.rain)
       };
     }));
   }
@@ -50,7 +52,8 @@ export class Forecast {
       type: s.type,
       wind: s.wind.toSnapshot(),
       cloud: s.cloud,
-      sky: s.sky
+      sky: s.sky,
+      rain: s.rain.toSnapshot()
     }));
   }
 }

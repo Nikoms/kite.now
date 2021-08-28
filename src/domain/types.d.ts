@@ -13,7 +13,8 @@ type ForecastSnapshot = {
   type: 'hour' | 'day',
   wind: { speed: number, unit: string, angle: number, gust: number },
   cloud: number,
-  sky: string
+  sky: string,
+  rain: number
 }[];
 
 type ForecastPart = {
@@ -21,7 +22,8 @@ type ForecastPart = {
   type: 'hour' | 'day',
   wind: import('./Wind').Wind,
   cloud: number,
-  sky: string
+  sky: string,
+  rain: import('./Rain').Rain
 }
 
 type LocationForecastSnapshot = {
