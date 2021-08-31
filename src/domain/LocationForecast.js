@@ -35,17 +35,10 @@ export class LocationForecast {
   }
 
   /**
-   * @return {LocationForecast}
+   * @return {import("./Forecast").Forecast}
    */
-  byHour() {
-    return new LocationForecast(this.#coordinates, this.#forecast.byHour(), this.#date);
-  }
-
-  /**
-   * @return {import("./types").ForecastPart[]}
-   */
-  forecastParts() {
-    return this.#forecast.asList();
+  forecast() {
+    return this.#forecast;
   }
 
   /**

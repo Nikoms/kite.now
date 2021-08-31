@@ -44,7 +44,6 @@ export class WindService {
       console.log(forecast);
       forecastSnapshot[forecast['dt'] * 1000] = {
         time: forecast['dt'] * 1000,
-        type: 'hour',
         wind: {
           speed: forecast['wind_speed'],
           angle: forecast['wind_deg'],
@@ -66,7 +65,6 @@ export class WindService {
       if (forecastSnapshot[forecast['dt'] * 1000] === undefined) {
         forecastSnapshot[forecast['dt'] * 1000] = {
           time: forecast['dt'] * 1000,
-          type: 'hour',
           wind: {
             speed: forecast['wind']['speed'],
             angle: forecast['wind']['deg'],

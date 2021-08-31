@@ -51,15 +51,11 @@ export class Wind {
     };
   }
 
-  isTooLight() {
-    return !this.isEnough();
-  }
-
   isEnough() {
-    return this.toKnots().speed() >= 12;
+    return this.toKnots().speed() >= 13;
   }
 
   isGusty() {
-    return this.toKnots().gust() - this.toKnots().speed() >= 8;
+    return this.toKnots().gust() - this.toKnots().speed() >= 7;
   }
 }

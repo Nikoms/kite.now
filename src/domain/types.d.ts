@@ -2,6 +2,11 @@ type Coordinates = {
   latitude: number,
   longitude: number
 }
+type Interval = {
+  from: number,
+  to: number
+}
+
 type CoordinatesSnapshot = Coordinates;
 type KiteSpotSnapShot = {
   coordinates: CoordinatesSnapshot,
@@ -10,20 +15,45 @@ type KiteSpotSnapShot = {
 
 type ForecastSnapshot = {
   time: number,
-  type: 'hour' | 'day',
   wind: { speed: number, unit: string, angle: number, gust: number },
   cloud: number,
   sky: string,
   rain: number
 }[];
 
-type ForecastPart = {
-  time: Date,
-  type: 'hour' | 'day',
-  wind: import('./Wind').Wind,
-  cloud: number,
-  sky: string,
+type HourlyForecast = {
+  time: Date
+  wind: import('./Wind').Wind
+  cloud: number
+  sky: string
   rain: import('./Rain').Rain
+}
+
+type PieceOfScore = {
+  name: string
+  percentage: number
+  weight: number
+  raw: string
+}
+
+type HourlyScore = {
+  pieces: import('./types').PieceOfScore[]
+  score: number
+  enoughWind: boolean
+  speed: number
+  gust: number
+  time: import('./DateTime').DateTime
+}
+
+type DailyScore = {
+  precision: number
+  average: number
+  enoughProbability: number
+  minSpeed: number
+  maxSpeed: number
+  maxGust: number
+  score: number
+  windyScore: number
 }
 
 type LocationForecastSnapshot = {

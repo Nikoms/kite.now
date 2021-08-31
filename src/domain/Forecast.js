@@ -1,11 +1,12 @@
 import {Wind} from './Wind.js';
 import {Rain} from './Rain.js';
+import {DateTime} from './DateTime.js';
 
 export class Forecast {
   /**
-   * @type {import("./types").ForecastPart[]}
+   * @type {import("./types").HourlyForecast[]}
    */
-  #forecastParts;
+  #hourlyForecasts;
 
   /**
    * @param {import("./types").ForecastSnapshot} snapshot
@@ -15,45 +16,67 @@ export class Forecast {
     return new Forecast(snapshot.map(s => {
       return {
         time: new Date(s.time),
-        type: s.type,
         wind: new Wind(s.wind.speed, s.wind.unit, s.wind.gust, s.wind.angle),
         cloud: s.cloud,
         sky: s.sky,
-        rain: Rain.fromSnapshot(s.rain)
+        rain: Rain.fromSnapshot(s.rain),
       };
     }));
   }
 
-  byHour() {
-    return new Forecast(this.#forecastParts.filter(f => f.type === 'hour'));
+  /**
+   * @return {import("./types").HourlyForecast[]}
+   */
+  asList() {
+    return [...this.#hourlyForecasts];
   }
 
   /**
-   * @return {import("./types").ForecastPart[]}
+   * @param {string} timeZone
+   * @return {{time:DateTime, forecast:Forecast}[]}
    */
-  asList() {
-    return [...this.#forecastParts];
+  splitByDay(timeZone) {
+    const days = {};
+    const firstTime = {};
+    for (const hourlyForecast of this.#hourlyForecasts) {
+      const time = new DateTime(hourlyForecast.time, timeZone);
+      if (!days[time.ymd()]) {
+        days[time.ymd()] = [];
+      }
+      days[time.ymd()].push(hourlyForecast);
+      if (!firstTime[time.ymd()]) {
+        firstTime[time.ymd()] = time;
+      }
+    }
+
+    const locationForecasts = [];
+    for (const [day, hourlyForecasts] of Object.entries(days)) {
+      locationForecasts.push({
+        forecast: new Forecast(hourlyForecasts),
+        time: firstTime[day],
+      });
+    }
+    return locationForecasts;
   }
 
   /**
    *
-   * @param {import("./types").ForecastPart[]} forecastParts
+   * @param {import("./types").HourlyForecast[]} hourlyForecasts
    */
-  constructor(forecastParts) {
-    this.#forecastParts = forecastParts;
+  constructor(hourlyForecasts) {
+    this.#hourlyForecasts = hourlyForecasts;
   }
 
   /**
    * @returns {import("./types").ForecastSnapshot}
    */
   toSnapshot() {
-    return this.#forecastParts.map(s => ({
+    return this.#hourlyForecasts.map(s => ({
       time: s.time.getTime(),
-      type: s.type,
       wind: s.wind.toSnapshot(),
       cloud: s.cloud,
       sky: s.sky,
-      rain: s.rain.toSnapshot()
+      rain: s.rain.toSnapshot(),
     }));
   }
 }

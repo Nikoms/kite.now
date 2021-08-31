@@ -6,25 +6,39 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 export class DateTime {
+  #date;
+  #timezone;
+  #timezonedDate;
+
   /**
    * @param {Date} date
    * @param {string} timezone
    */
   constructor(date, timezone) {
-    this.date = date;
-    this.timezone = timezone;
+    this.#date = date;
+    this.#timezone = timezone;
+    this.#timezonedDate = dayjs(this.#date).tz(this.#timezone);
   }
 
   format() {
-    return dayjs(this.date).tz(this.timezone).format('dd DD/MM/YYYY HH:mm ZZ');
+    return this.#timezonedDate.format('dd DD/MM/YYYY HH:mm ZZ');
+  }
+
+  hourBetween(from, to) {
+    const hour = Number(this.#timezonedDate.format('H'));
+    return from <= hour && hour <= to;
   }
 
   shortFormat() {
-    return dayjs(this.date).tz(this.timezone).format('dd DD/MM HH:mm');
+    return this.#timezonedDate.format('dd DD/MM HH:mm');
+  }
+
+  ymd() {
+    return this.#timezonedDate.format('YYYY-MM-DD');
   }
 
   between(from, to) {
-    return this.date.getHours() >= from && this.date.getHours() < to;
+    return this.#date.getHours() >= from && this.#date.getHours() <= to;
   }
 
   toString() {
